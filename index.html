@@ -10,41 +10,40 @@
         body {
             margin: 0;
             padding: 0;
-            /* The "background card" behind the app - a bit darker to create contrast */
-            background-color: #d4d4d4; 
+            /* The "background card" - creates the 2-card effect */
+            background-color: #e0e0e0; 
             font-family: 'Arial Greek', Arial, Helvetica, sans-serif;
             display: flex;
             justify-content: center;
-            align-items: flex-end; /* Pushes the white card to the bottom */
+            align-items: flex-end; /* Pushes white card to bottom */
             min-height: 100vh;
             overflow: hidden;
         }
 
-        /* THE MAIN APP CARD (The raised white sheet) */
+        /* THE MAIN APP CARD */
         .app-card {
             width: 100%;
             max-width: 430px;
-            height: 92vh;
+            height: 90vh; /* Slightly shorter to show bottom background */
             background: #ffffff;
-            border-top-left-radius: 24px; /* Heavy round corners at top */
-            border-top-right-radius: 24px;
-            /* The shadow on the top edge creates the "raised" look */
-            box-shadow: 0 -6px 30px rgba(0,0,0,0.15); 
+            border-top-left-radius: 12px; /* More square corners */
+            border-top-right-radius: 12px;
+            box-shadow: 0 -6px 30px rgba(0,0,0,0.10); 
             display: flex;
             flex-direction: column;
-            /* The padding here is the gap between the card edge and the content */
-            padding: 20px 20px 0 20px; 
+            /* Removed top padding so header sits HIGHER up */
+            padding: 0 20px 0 20px; 
             position: relative;
             overflow-y: hidden;
         }
 
         /* INNER CONTENT WRAPPER */
-        /* This ensures the top elements don't squish against the rounded corners */
         .content-wrapper {
             width: 100%;
             display: flex;
             flex-direction: column;
             align-items: center;
+            padding-top: 15px; /* Tiny gap from top edge to the X */
         }
 
         /* HEADER */
@@ -68,11 +67,11 @@
             font-weight: 400;
         }
         .close-btn {
-            font-size: 26px;
+            font-size: 24px;
             color: #333;
             cursor: pointer;
             line-height: 1;
-            margin-top: 2px;
+            margin-top: 0px; /* Pulled up */
         }
 
         /* PULSING CIRCLE */
@@ -82,7 +81,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            margin: 20px 0 10px 0;
+            margin: 10px 0 10px 0;
             position: relative;
         }
         .pulse-ring {
@@ -114,15 +113,18 @@
             box-shadow: 0 2px 8px rgba(0,0,0,0.1);
         }
 
-        /* LIVE CLOCK */
+        /* LIVE CLOCK - Aligned to button width */
         .live-time {
             font-family: 'Arial Greek', Arial, sans-serif;
             font-weight: 700;
             font-size: 54px;
             color: #333;
-            margin: 15px 0 25px 0;
+            margin: 10px 0 25px 0;
             letter-spacing: 0.5px;
             font-variant-numeric: tabular-nums;
+            display: inline-block;
+            min-width: 250px; /* Forces width to match button */
+            text-align: center;
         }
 
         /* RED BUTTON IMAGE */
@@ -135,14 +137,14 @@
             display: block;
         }
 
-        /* BOTTOM INFO CARD */
+        /* BOTTOM INFO CARD - Darker Shadow */
         .info-card {
             width: 96%;
             background: #ffffff;
-            border-radius: 10px;
+            border-radius: 8px; /* Slightly sharper corners */
             padding: 20px 18px;
-            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
-            border: 1px solid #f0f0f0;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.12); /* Darker shadow */
+            border: 1px solid #eaeaea;
             margin-bottom: 20px;
             text-align: left;
         }
@@ -165,10 +167,18 @@
             color: #444;
         }
 
+        /* BOTTOM SPACER - This exposes the background below the card */
+        .bottom-spacer {
+            width: 100%;
+            height: 30px;
+            background: transparent;
+        }
+
         /* RESPONSIVE FIXES */
         @media (max-width: 400px) {
-            .live-time { font-size: 44px; }
+            .live-time { font-size: 44px; min-width: 200px; }
             .circle-wrapper { transform: scale(0.9); }
+            .youth-btn-img { width: 88%; }
         }
     </style>
 </head>
@@ -177,7 +187,7 @@
     <!-- The raised white card -->
     <div class="app-card">
         
-        <!-- Inner wrapper to keep content cleanly inside the rounded corners -->
+        <!-- Inner wrapper for content spacing -->
         <div class="content-wrapper">
             
             <!-- Header -->
@@ -195,19 +205,21 @@
                 <img class="logo-img" src="logo.jpg" alt="Whitehorse Logo">
             </div>
 
-            <!-- Live Clock -->
+            <!-- Live Clock (Now wider) -->
             <div class="live-time" id="clock">10:37:44 PM</div>
 
             <!-- Youth Button -->
             <img class="youth-btn-img" src="button.jpg" alt="Youth Button">
 
-            <!-- Bottom Info Card -->
+            <!-- Bottom Info Card (Darker shadow, sharper) -->
             <div class="info-card">
                 <h3>Youth 10 Ride</h3>
                 <div class="sub">Whitehorse, YT</div>
                 <div class="expiry" id="expiry-text">Expires Oct 24, 2024 at 11:37 PM</div>
             </div>
             
+            <!-- Spacer to show the grey background at the very bottom -->
+            <div class="bottom-spacer"></div>
         </div>
     </div>
 
