@@ -5,36 +5,33 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <title>Whitehorse Transit</title>
     <style>
-        /* RESET & BASE */
+        /* RESET & BASE - DARK GREY BACKGROUND FOR THE "2nd CARD" EFFECT */
         * { box-sizing: border-box; }
         body {
             margin: 0;
             padding: 0;
-            /* The "background card" - creates the 2-card effect */
-            background-color: #e0e0e0; 
+            background-color: #c8c8c8; /* Darker grey so the white card pops out */
             font-family: 'Arial Greek', Arial, Helvetica, sans-serif;
             display: flex;
             justify-content: center;
-            align-items: flex-end; /* Pushes white card to bottom */
+            align-items: flex-end;
             min-height: 100vh;
             overflow: hidden;
         }
 
-        /* THE MAIN APP CARD */
+        /* THE MAIN APP CARD - FLUSH TO TOP, ROUNDED CORNERS */
         .app-card {
             width: 100%;
             max-width: 430px;
-            height: 90vh; /* Slightly shorter to show bottom background */
+            height: 94vh; /* Leaves just a tiny sliver of grey at the bottom */
             background: #ffffff;
-            border-top-left-radius: 12px; /* More square corners */
-            border-top-right-radius: 12px;
-            box-shadow: 0 -6px 30px rgba(0,0,0,0.10); 
+            border-top-left-radius: 25px; /* CREATES THE INDEX CARD SHAPE */
+            border-top-right-radius: 25px;
+            box-shadow: 0 -8px 40px rgba(0,0,0,0.15); /* Strong top shadow */
             display: flex;
             flex-direction: column;
-            /* Removed top padding so header sits HIGHER up */
-            padding: 0 20px 0 20px; 
+            padding: 0 20px 20px 20px; /* Top padding is ZERO so it touches the top */
             position: relative;
-            overflow-y: hidden;
         }
 
         /* INNER CONTENT WRAPPER */
@@ -43,16 +40,17 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            padding-top: 15px; /* Tiny gap from top edge to the X */
+            padding-top: 15px; /* Tiny safe distance from the very top edge */
         }
 
-        /* HEADER */
+        /* HEADER - PULLED HIGH UP */
         .header {
             width: 100%;
             display: flex;
             justify-content: space-between;
             align-items: flex-start;
             padding-bottom: 15px;
+            margin-top: -2px; /* PULLS IT EVEN HIGHER if needed */
         }
         .header-title h1 {
             margin: 0;
@@ -71,7 +69,6 @@
             color: #333;
             cursor: pointer;
             line-height: 1;
-            margin-top: 0px; /* Pulled up */
         }
 
         /* PULSING CIRCLE */
@@ -81,13 +78,13 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            margin: 10px 0 10px 0;
+            margin: 5px 0 5px 0;
             position: relative;
         }
         .pulse-ring {
             position: absolute;
-            width: 190px;
-            height: 190px;
+            width: 185px;
+            height: 185px;
             background-color: #00748b;
             border-radius: 50%;
             box-shadow: 0 2px 10px rgba(0,0,0,0.1);
@@ -96,7 +93,7 @@
         }
         @keyframes pulse-anim {
             0% { transform: scale(0.95); }
-            50% { transform: scale(1.15); }
+            50% { transform: scale(1.10); }
             100% { transform: scale(0.95); }
         }
 
@@ -113,17 +110,17 @@
             box-shadow: 0 2px 8px rgba(0,0,0,0.1);
         }
 
-        /* LIVE CLOCK - Aligned to button width */
+        /* LIVE CLOCK - FORCED TO BE WIDE */
         .live-time {
             font-family: 'Arial Greek', Arial, sans-serif;
             font-weight: 700;
-            font-size: 54px;
+            font-size: 50px; /* Slightly smaller to fit the width better */
             color: #333;
-            margin: 10px 0 25px 0;
-            letter-spacing: 0.5px;
+            margin: 5px 0 25px 0;
+            letter-spacing: 2px; /* STRETCHES THE TEXT WIDER */
             font-variant-numeric: tabular-nums;
             display: inline-block;
-            min-width: 250px; /* Forces width to match button */
+            min-width: 300px; /* PHYSICALLY FORCES IT TO BE AS WIDE AS THE BUTTON */
             text-align: center;
         }
 
@@ -137,15 +134,15 @@
             display: block;
         }
 
-        /* BOTTOM INFO CARD - Darker Shadow */
+        /* BOTTOM INFO CARD */
         .info-card {
             width: 96%;
             background: #ffffff;
-            border-radius: 8px; /* Slightly sharper corners */
-            padding: 20px 18px;
-            box-shadow: 0 6px 20px rgba(0,0,0,0.12); /* Darker shadow */
+            border-radius: 8px;
+            padding: 18px 18px;
+            box-shadow: 0 6px 25px rgba(0,0,0,0.15); /* Stronger shadow */
             border: 1px solid #eaeaea;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
             text-align: left;
         }
         .info-card h3 {
@@ -167,30 +164,20 @@
             color: #444;
         }
 
-        /* BOTTOM SPACER - This exposes the background below the card */
-        .bottom-spacer {
-            width: 100%;
-            height: 30px;
-            background: transparent;
-        }
-
         /* RESPONSIVE FIXES */
         @media (max-width: 400px) {
-            .live-time { font-size: 44px; min-width: 200px; }
-            .circle-wrapper { transform: scale(0.9); }
+            .live-time { font-size: 40px; min-width: 250px; letter-spacing: 1.5px; }
+            .circle-wrapper { transform: scale(0.85); }
             .youth-btn-img { width: 88%; }
+            .app-card { height: 92vh; }
         }
     </style>
 </head>
 <body>
 
-    <!-- The raised white card -->
     <div class="app-card">
-        
-        <!-- Inner wrapper for content spacing -->
         <div class="content-wrapper">
             
-            <!-- Header -->
             <div class="header">
                 <div class="header-title">
                     <h1>Whitehorse Transit</h1>
@@ -199,32 +186,25 @@
                 <div class="close-btn">✕</div>
             </div>
 
-            <!-- Circle & Logo -->
             <div class="circle-wrapper">
                 <div class="pulse-ring"></div>
                 <img class="logo-img" src="logo.jpg" alt="Whitehorse Logo">
             </div>
 
-            <!-- Live Clock (Now wider) -->
             <div class="live-time" id="clock">10:37:44 PM</div>
 
-            <!-- Youth Button -->
             <img class="youth-btn-img" src="button.jpg" alt="Youth Button">
 
-            <!-- Bottom Info Card (Darker shadow, sharper) -->
             <div class="info-card">
                 <h3>Youth 10 Ride</h3>
                 <div class="sub">Whitehorse, YT</div>
                 <div class="expiry" id="expiry-text">Expires Oct 24, 2024 at 11:37 PM</div>
             </div>
             
-            <!-- Spacer to show the grey background at the very bottom -->
-            <div class="bottom-spacer"></div>
         </div>
     </div>
 
     <script>
-        // --- CLOCK LOGIC ---
         function updateClock() {
             const now = new Date();
             let h = now.getHours();
@@ -239,7 +219,6 @@
         updateClock();
         setInterval(updateClock, 1000);
 
-        // --- EXPIRY LOGIC ---
         function updateExpiry() {
             const now = new Date();
             let targetHour = now.getHours();
@@ -247,14 +226,11 @@
 
             if (targetMinute < 15) {
                 targetMinute = 0;
-                if (now.getMinutes() < 15) {
-                    targetHour += 1;
-                }
+                if (now.getMinutes() < 15) targetHour += 1;
             } else {
                 targetMinute = 0;
                 targetHour += 1;
             }
-
             if (targetHour >= 24) targetHour = 0;
 
             const expiryDate = new Date(now);
@@ -271,8 +247,7 @@
             eh = eh % 12 || 12;
             em = String(em).padStart(2, '0');
 
-            document.getElementById('expiry-text').textContent = 
-                `Expires ${month} ${day}, ${year} at ${eh}:${em} ${eampm}`;
+            document.getElementById('expiry-text').textContent = `Expires ${month} ${day}, ${year} at ${eh}:${em} ${eampm}`;
         }
         updateExpiry();
         setInterval(updateExpiry, 60000);
