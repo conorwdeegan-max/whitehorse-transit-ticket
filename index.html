@@ -5,12 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <title>Whitehorse Transit</title>
     <style>
-        /* RESET & BASE - DARK GREY BACKGROUND FOR THE "2nd CARD" EFFECT */
+        /* RESET & BASE - DARK CARD BACKGROUND */
         * { box-sizing: border-box; }
         body {
             margin: 0;
             padding: 0;
-            background-color: #c8c8c8; /* Darker grey so the white card pops out */
+            background-color: #bfbfbf; /* Dark grey background */
             font-family: 'Arial Greek', Arial, Helvetica, sans-serif;
             display: flex;
             justify-content: center;
@@ -19,38 +19,39 @@
             overflow: hidden;
         }
 
-        /* THE MAIN APP CARD - FLUSH TO TOP, ROUNDED CORNERS */
+        /* THE WHITE CARD - SHORTER HEIGHT, SQUARE CORNERS */
         .app-card {
             width: 100%;
             max-width: 430px;
-            height: 94vh; /* Leaves just a tiny sliver of grey at the bottom */
+            height: 80vh; /* Shortened to show the grey card clearly */
             background: #ffffff;
-            border-top-left-radius: 25px; /* CREATES THE INDEX CARD SHAPE */
-            border-top-right-radius: 25px;
-            box-shadow: 0 -8px 40px rgba(0,0,0,0.15); /* Strong top shadow */
+            border-top-left-radius: 10px; /* MORE SQUARE (only slight curve) */
+            border-top-right-radius: 10px;
+            box-shadow: 0 -8px 40px rgba(0,0,0,0.15);
             display: flex;
             flex-direction: column;
-            padding: 0 20px 20px 20px; /* Top padding is ZERO so it touches the top */
+            padding: 0 15px 15px 15px; 
             position: relative;
+            overflow-y: hidden;
         }
 
-        /* INNER CONTENT WRAPPER */
+        /* CONTENT WRAPPER */
         .content-wrapper {
             width: 100%;
             display: flex;
             flex-direction: column;
             align-items: center;
-            padding-top: 15px; /* Tiny safe distance from the very top edge */
+            padding-top: 18px;
         }
 
-        /* HEADER - PULLED HIGH UP */
+        /* HEADER */
         .header {
             width: 100%;
             display: flex;
             justify-content: space-between;
             align-items: flex-start;
-            padding-bottom: 15px;
-            margin-top: -2px; /* PULLS IT EVEN HIGHER if needed */
+            padding-bottom: 0px;
+            margin-top: 0px;
         }
         .header-title h1 {
             margin: 0;
@@ -65,26 +66,27 @@
             font-weight: 400;
         }
         .close-btn {
-            font-size: 24px;
+            font-size: 20px; /* SMALLER X */
             color: #333;
             cursor: pointer;
             line-height: 1;
+            padding-top: 2px; /* Tweak to align exactly */
         }
 
-        /* PULSING CIRCLE */
+        /* PULSING CIRCLE - SLIGHTLY LARGER */
         .circle-wrapper {
-            width: 200px;
-            height: 200px;
+            width: 215px; /* LARGER */
+            height: 215px;
             display: flex;
             justify-content: center;
             align-items: center;
-            margin: 5px 0 5px 0;
+            margin: 15px 0 5px 0;
             position: relative;
         }
         .pulse-ring {
             position: absolute;
-            width: 185px;
-            height: 185px;
+            width: 200px; /* LARGER */
+            height: 200px;
             background-color: #00748b;
             border-radius: 50%;
             box-shadow: 0 2px 10px rgba(0,0,0,0.1);
@@ -101,8 +103,8 @@
         .logo-img {
             position: relative;
             z-index: 2;
-            width: 100px;
-            height: 100px;
+            width: 105px;
+            height: 105px;
             border-radius: 50%;
             object-fit: cover;
             background: white;
@@ -110,39 +112,40 @@
             box-shadow: 0 2px 8px rgba(0,0,0,0.1);
         }
 
-        /* LIVE CLOCK - FORCED TO BE WIDE */
+        /* LIVE CLOCK - MASSIVE, WIDE, LOWER ON SCREEN */
         .live-time {
             font-family: 'Arial Greek', Arial, sans-serif;
             font-weight: 700;
-            font-size: 50px; /* Slightly smaller to fit the width better */
+            font-size: 56px; /* MASSIVE TEXT */
             color: #333;
-            margin: 5px 0 25px 0;
-            letter-spacing: 2px; /* STRETCHES THE TEXT WIDER */
+            margin-top: 20px; /* PUSHED LOWER */
+            margin-bottom: 30px; /* PUSHED LOWER */
+            letter-spacing: 4px; /* STRETCHES IT WIDE */
             font-variant-numeric: tabular-nums;
             display: inline-block;
-            min-width: 300px; /* PHYSICALLY FORCES IT TO BE AS WIDE AS THE BUTTON */
+            min-width: 320px; /* ENSURES IT IS WIDE */
             text-align: center;
         }
 
-        /* RED BUTTON IMAGE */
+        /* RED BUTTON IMAGE - WIDER THAN WHITE CARD */
         .youth-btn-img {
-            width: 92%;
-            max-width: 380px;
+            width: 99%; /* WIDER than the white box below it */
+            max-width: 400px;
             height: auto;
             object-fit: contain;
-            margin-bottom: 25px;
+            margin-bottom: 30px;
             display: block;
         }
 
-        /* BOTTOM INFO CARD */
+        /* BOTTOM INFO CARD - SLIGHTLY NARROWER */
         .info-card {
-            width: 96%;
+            width: 96%; /* Narrower than the red button */
             background: #ffffff;
             border-radius: 8px;
             padding: 18px 18px;
-            box-shadow: 0 6px 25px rgba(0,0,0,0.15); /* Stronger shadow */
+            box-shadow: 0 6px 25px rgba(0,0,0,0.15);
             border: 1px solid #eaeaea;
-            margin-bottom: 15px;
+            margin-bottom: 10px;
             text-align: left;
         }
         .info-card h3 {
@@ -163,18 +166,11 @@
             font-size: 15px;
             color: #444;
         }
-
-        /* RESPONSIVE FIXES */
-        @media (max-width: 400px) {
-            .live-time { font-size: 40px; min-width: 250px; letter-spacing: 1.5px; }
-            .circle-wrapper { transform: scale(0.85); }
-            .youth-btn-img { width: 88%; }
-            .app-card { height: 92vh; }
-        }
     </style>
 </head>
 <body>
 
+    <!-- THE WHITE CARD -->
     <div class="app-card">
         <div class="content-wrapper">
             
@@ -191,10 +187,13 @@
                 <img class="logo-img" src="logo.jpg" alt="Whitehorse Logo">
             </div>
 
+            <!-- Massively large, lowered clock -->
             <div class="live-time" id="clock">10:37:44 PM</div>
 
+            <!-- Super wide red button -->
             <img class="youth-btn-img" src="button.jpg" alt="Youth Button">
 
+            <!-- Narrower bottom card -->
             <div class="info-card">
                 <h3>Youth 10 Ride</h3>
                 <div class="sub">Whitehorse, YT</div>
