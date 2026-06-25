@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>Whitehorse Transit</title>
+    <style>
+        /* RESET & BASE */
+        * { box-sizing: border-box; }
+        body {
+            margin: 0;
+            padding: 0;
+            /* The "background card" behind the app - a bit darker to create contrast */
+            background-color: #d4d4d4; 
+            font-family: 'Arial Greek', Arial, Helvetica, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: flex-end; /* Pushes the white card to the bottom */
+            min-height: 100vh;
+            overflow: hidden;
+        }
+
+        /* THE MAIN APP CARD (The raised white sheet) */
+        .app-card {
+            width: 100%;
+            max-width: 430px;
+            height: 92vh;
+            background: #ffffff;
+            border-top-left-radius: 24px; /* Heavy round corners at top */
+            border-top-right-radius: 24px;
+            /* The shadow on the top edge creates the "raised" look */
+            box-shadow: 0 -6px 30px rgba(0,0,0,0.15); 
+            display: flex;
+            flex-direction: column;
+            /* The padding here is the gap between the card edge and the content */
+            padding: 20px 20px 0 20px; 
+            position: relative;
+            overflow-y: hidden;
+        }
+
+        /* INNER CONTENT WRAPPER */
+        /* This ensures the top elements don't squish against the rounded corners */
+        .content-wrapper {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* HEADER */
+        .header {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            padding-bottom: 15px;
+        }
+        .header-title h1 {
+            margin: 0;
+            font-size: 22px;
+            font-weight: 700;
+            color: #222;
+        }
+        .header-title p {
+            margin: 2px 0 0 0;
+            font-size: 14px;
+            color: #666;
+            font-weight: 400;
+        }
+        .close-btn {
+            font-size: 26px;
+            color: #333;
+            cursor: pointer;
+            line-height: 1;
+            margin-top: 2px;
+        }
+
+        /* PULSING CIRCLE */
+        .circle-wrapper {
+            width: 200px;
+            height: 200px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 20px 0 10px 0;
+            position: relative;
+        }
+        .pulse-ring {
+            position: absolute;
+            width: 190px;
+            height: 190px;
+            background-color: #00748b;
+            border-radius: 50%;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            animation: pulse-anim 2.5s infinite ease-in-out;
+            z-index: 1;
+        }
+        @keyframes pulse-anim {
+            0% { transform: scale(0.95); }
+            50% { transform: scale(1.15); }
+            100% { transform: scale(0.95); }
+        }
+
+        /* LOGO IMAGE */
+        .logo-img {
+            position: relative;
+            z-index: 2;
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+            background: white;
+            border: 4px solid white;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        /* LIVE CLOCK */
+        .live-time {
+            font-family: 'Arial Greek', Arial, sans-serif;
+            font-weight: 700;
+            font-size: 54px;
+            color: #333;
+            margin: 15px 0 25px 0;
+            letter-spacing: 0.5px;
+            font-variant-numeric: tabular-nums;
+        }
+
+        /* RED BUTTON IMAGE */
+        .youth-btn-img {
+            width: 92%;
+            max-width: 380px;
+            height: auto;
+            object-fit: contain;
+            margin-bottom: 25px;
+            display: block;
+        }
+
+        /* BOTTOM INFO CARD */
+        .info-card {
+            width: 96%;
+            background: #ffffff;
+            border-radius: 10px;
+            padding: 20px 18px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+            border: 1px solid #f0f0f0;
+            margin-bottom: 20px;
+            text-align: left;
+        }
+        .info-card h3 {
+            margin: 0 0 4px 0;
+            font-size: 20px;
+            color: #222;
+            font-weight: 500;
+        }
+        .info-card .sub {
+            margin: 0 0 16px 0;
+            font-size: 15px;
+            color: #777;
+            font-weight: 400;
+        }
+        .info-card .expiry {
+            font-family: 'Arial Greek', Arial, sans-serif;
+            font-weight: 700;
+            font-size: 15px;
+            color: #444;
+        }
+
+        /* RESPONSIVE FIXES */
+        @media (max-width: 400px) {
+            .live-time { font-size: 44px; }
+            .circle-wrapper { transform: scale(0.9); }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- The raised white card -->
+    <div class="app-card">
+        
+        <!-- Inner wrapper to keep content cleanly inside the rounded corners -->
+        <div class="content-wrapper">
+            
+            <!-- Header -->
+            <div class="header">
+                <div class="header-title">
+                    <h1>Whitehorse Transit</h1>
+                    <p>Show operator your ticket</p>
+                </div>
+                <div class="close-btn">✕</div>
+            </div>
+
+            <!-- Circle & Logo -->
+            <div class="circle-wrapper">
+                <div class="pulse-ring"></div>
+                <img class="logo-img" src="logo.jpg" alt="Whitehorse Logo">
+            </div>
+
+            <!-- Live Clock -->
+            <div class="live-time" id="clock">10:37:44 PM</div>
+
+            <!-- Youth Button -->
+            <img class="youth-btn-img" src="button.jpg" alt="Youth Button">
+
+            <!-- Bottom Info Card -->
+            <div class="info-card">
+                <h3>Youth 10 Ride</h3>
+                <div class="sub">Whitehorse, YT</div>
+                <div class="expiry" id="expiry-text">Expires Oct 24, 2024 at 11:37 PM</div>
+            </div>
+            
+        </div>
+    </div>
+
+    <script>
+        // --- CLOCK LOGIC ---
+        function updateClock() {
+            const now = new Date();
+            let h = now.getHours();
+            let m = now.getMinutes();
+            let s = now.getSeconds();
+            const ampm = h >= 12 ? 'PM' : 'AM';
+            h = h % 12 || 12;
+            m = String(m).padStart(2, '0');
+            s = String(s).padStart(2, '0');
+            document.getElementById('clock').textContent = `${h}:${m}:${s} ${ampm}`;
+        }
+        updateClock();
+        setInterval(updateClock, 1000);
+
+        // --- EXPIRY LOGIC ---
+        function updateExpiry() {
+            const now = new Date();
+            let targetHour = now.getHours();
+            let targetMinute = now.getMinutes();
+
+            if (targetMinute < 15) {
+                targetMinute = 0;
+                if (now.getMinutes() < 15) {
+                    targetHour += 1;
+                }
+            } else {
+                targetMinute = 0;
+                targetHour += 1;
+            }
+
+            if (targetHour >= 24) targetHour = 0;
+
+            const expiryDate = new Date(now);
+            expiryDate.setHours(targetHour, targetMinute, 0, 0);
+
+            const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+            const month = months[expiryDate.getMonth()];
+            const day = expiryDate.getDate();
+            const year = expiryDate.getFullYear();
+
+            let eh = expiryDate.getHours();
+            let em = expiryDate.getMinutes();
+            const eampm = eh >= 12 ? 'PM' : 'AM';
+            eh = eh % 12 || 12;
+            em = String(em).padStart(2, '0');
+
+            document.getElementById('expiry-text').textContent = 
+                `Expires ${month} ${day}, ${year} at ${eh}:${em} ${eampm}`;
+        }
+        updateExpiry();
+        setInterval(updateExpiry, 60000);
+    </script>
+
+</body>
+</html>
